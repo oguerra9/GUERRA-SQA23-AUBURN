@@ -9,6 +9,9 @@ import graphtaint
 import os 
 import pandas as pd 
 import numpy as np 
+import my-logger
+
+logObj = my-logger.giveMeLoggingObject()
 
 def getYAMLFiles(path_to_dir):
     valid_  = [] 
@@ -25,10 +28,13 @@ def isValidUserName(uName):
     if (isinstance( uName , str)  ): 
         if( any(z_ in uName for z_ in constants.FORBIDDEN_USER_NAMES )   ): 
             valid = False   
+            logObj.warning('forbidden username')
         else: 
             valid = True    
+            logObj.info('valid username')
     else: 
         valid = False   
+	logObj.warning('invalid username')
     return valid
 
 def isValidPasswordName(pName): 
@@ -36,10 +42,13 @@ def isValidPasswordName(pName):
     if (isinstance( pName , str)  ): 
         if( any(z_ in pName for z_ in constants.FORBIDDEN_PASS_NAMES) )  : 
             valid = False  
+            logObj.warning('forbidden password name')
         else: 
             valid = True    
+            logObj.info('valid password name')
     else: 
         valid = False               
+	logObj.warning('invalid password name')
     return valid
 
 def isValidKey(keyName): 
@@ -47,10 +56,13 @@ def isValidKey(keyName):
     if ( isinstance( keyName, str )  ):
         if( any(z_ in keyName for z_ in constants.LEGIT_KEY_NAMES ) ) : 
             valid = True   
+	    logObj.info('key name validated')
         else: 
             valid = False     
+	    logObj.warning('invalid key name')
     else: 
         valid = False                      
+	lobObj.warning('invalid data type: key name should be string')
     return valid    
 
 def checkIfValidSecret(single_config_val):
@@ -69,6 +81,7 @@ def checkIfValidSecret(single_config_val):
     return flag2Ret
 
 def scanUserName(k_ , val_lis ):
+    logObj.info('scanning for hard-coded usernames...')
     hard_coded_unames = []
     if isinstance(k_, str):
         k_ = k_.lower()    
@@ -78,17 +91,22 @@ def scanUserName(k_ , val_lis ):
         for val_ in val_lis:
             if (checkIfValidSecret( val_ ) ): 
                 # print(val_) 
+		logObj.info('hard-coded secret username detect')
                 hard_coded_unames.append( val_ )
+    logObj.info('scan for hard-coded usernames completed')
     return hard_coded_unames
 
 def scanPasswords(k_ , val_lis ):
+    logObj.info('scanning for hard-coded passwords...')
     hard_coded_pwds = []
     if isinstance(k_, str):
         k_ = k_.lower()    
     if( isValidPasswordName( k_ )   and any(x_ in k_ for x_ in constants.SECRET_PASSWORD_LIST )  ):
         for val_ in val_lis:
             if (checkIfValidSecret( val_ ) ): 
+		logObj.info('hard-coded secret password detected')
                 hard_coded_pwds.append( val_ )
+    logObj.info('scan for hard-coded passwords completed')
     return hard_coded_pwds
 
 
@@ -100,13 +118,16 @@ def checkIfValidKeyValue(single_config_val):
     return flag2Ret
 
 def scanKeys(k_, val_lis):
+    logObj.info('scanning for hard-coded keys...')
     hard_coded_keys = []
     if isinstance(k_, str):
         k_ = k_.lower()    
     if( isValidKey( k_ )    ):
         for val_ in val_lis:
             if (checkIfValidKeyValue( val_ ) ): 
+		logObj.info('hard-coded key detected')
                 hard_coded_keys.append( val_ )
+    logObj.info('scan for hard-coded keys completed')
     return hard_coded_keys    
 
 
@@ -763,4 +784,4 @@ if __name__ == '__main__':
     # cap_sys_module_yaml = 'TEST_ARTIFACTS/cap-module-ostk.yaml'
     # cap_sys_module_dic  = scanForCAPMODULE ( cap_sys_module_yaml )   
 
-    print(cap_sys_module_dic)  
+    print(cap_sys_module_dic)

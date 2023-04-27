@@ -6,6 +6,9 @@ Source Code to Run Tool on All Kubernetes Manifests
 import scanner 
 import pandas as pd 
 import constants
+import my-logger
+
+logObj = my-logger.giveMeLoggingObject()
 
 def getCountFromAnalysis(ls_):
     list2ret           = []
@@ -66,6 +69,7 @@ if __name__ == '__main__':
 
     content_as_ls   = scanner.runScanner( ORG_DIR )
     df_all          = pd.DataFrame( getCountFromAnalysis( content_as_ls ) )
+    logObj.info('data frame created')
 
     df_all.to_csv( OUTPUT_FILE_CSV, header= constants.CSV_HEADER , index=False, encoding= constants.CSV_ENCODING ) 
 

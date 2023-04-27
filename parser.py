@@ -6,6 +6,9 @@ Parser to file YAML files
 
 import yaml
 import constants 
+import my-logger
+
+logObj = my-logger.giveMeLoggingObject()
 
 def checkIfWeirdYAML(yaml_script):
     '''
@@ -14,6 +17,7 @@ def checkIfWeirdYAML(yaml_script):
     val = False
     if ( any(x_ in yaml_script for x_ in constants.WEIRD_PATHS  ) ):
         val = True 
+	logObj.info('invalid YAML found')
     return val 
 
 
