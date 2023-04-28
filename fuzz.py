@@ -36,7 +36,6 @@ def fuzzValues():
 		"", "undefined", "undef", "null", "NULL", "(null)", "nil", "NIL",
 		"true", "false", "True", "False", "TRUE", "FALSE",
 		"None", "hasOwnProperty", "then",
-		"\\", "\\\\",
 		"0", "1", "1.00", "$1.00", "1/2", "1E2", "1E02", "1E+02", "-1", "-1.00", "-$1.00",
 		"-1/2", "-1E2", "-1E02", "-1E+02",
 		"1/0", 	"0/0", "-2147483648/-1", "-9223372036854775808/-1",
@@ -212,14 +211,6 @@ def fuzzValues():
 		print('INPUT: ', value)
 		print('OUTPUT: ', validKeyOutput)
 	'''
-
-	print('scanner.py/runScanner(dir2scan)')
-	emptyList = []
-	for value in values:
-		validKeyOutput = scanner.runScanner(value)
-		if validKeyOutput != emptyList:
-			print('INPUT: ', value)
-			print('OUTPUT: ', validKeyOutput)
 
 def simpleFuzzer():
     fuzzValues()
