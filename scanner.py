@@ -9,9 +9,9 @@ import graphtaint
 import os 
 import pandas as pd 
 import numpy as np 
-import my-logger
+import my_logger
 
-logObj = my-logger.giveMeLoggingObject()
+logObj = my_logger.giveMeLoggingObject()
 
 def getYAMLFiles(path_to_dir):
     valid_  = [] 
@@ -34,7 +34,7 @@ def isValidUserName(uName):
             logObj.info('valid username')
     else: 
         valid = False   
-	logObj.warning('invalid username')
+        logObj.warning('invalid username')
     return valid
 
 def isValidPasswordName(pName): 
@@ -48,21 +48,21 @@ def isValidPasswordName(pName):
             logObj.info('valid password name')
     else: 
         valid = False               
-	logObj.warning('invalid password name')
+        logObj.warning('invalid password name')
     return valid
 
 def isValidKey(keyName): 
     valid = False 
     if ( isinstance( keyName, str )  ):
         if( any(z_ in keyName for z_ in constants.LEGIT_KEY_NAMES ) ) : 
-            valid = True   
-	    logObj.info('key name validated')
+            valid = True
+            logObj.info('key name validated')
         else: 
             valid = False     
-	    logObj.warning('invalid key name')
+            logObj.warning('invalid key name')
     else: 
         valid = False                      
-	lobObj.warning('invalid data type: key name should be string')
+        lobObj.warning('invalid data type: key name should be string')
     return valid    
 
 def checkIfValidSecret(single_config_val):
@@ -91,7 +91,7 @@ def scanUserName(k_ , val_lis ):
         for val_ in val_lis:
             if (checkIfValidSecret( val_ ) ): 
                 # print(val_) 
-		logObj.info('hard-coded secret username detect')
+                logObj.info('hard-coded secret username detect')
                 hard_coded_unames.append( val_ )
     logObj.info('scan for hard-coded usernames completed')
     return hard_coded_unames
@@ -104,7 +104,7 @@ def scanPasswords(k_ , val_lis ):
     if( isValidPasswordName( k_ )   and any(x_ in k_ for x_ in constants.SECRET_PASSWORD_LIST )  ):
         for val_ in val_lis:
             if (checkIfValidSecret( val_ ) ): 
-		logObj.info('hard-coded secret password detected')
+                logObj.info('hard-coded secret password detected')
                 hard_coded_pwds.append( val_ )
     logObj.info('scan for hard-coded passwords completed')
     return hard_coded_pwds
@@ -125,7 +125,7 @@ def scanKeys(k_, val_lis):
     if( isValidKey( k_ )    ):
         for val_ in val_lis:
             if (checkIfValidKeyValue( val_ ) ): 
-		logObj.info('hard-coded key detected')
+                logObj.info('hard-coded key detected')
                 hard_coded_keys.append( val_ )
     logObj.info('scan for hard-coded keys completed')
     return hard_coded_keys    

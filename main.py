@@ -6,9 +6,9 @@ Source Code to Run Tool on All Kubernetes Manifests
 import scanner 
 import pandas as pd 
 import constants
-import my-logger
+import my_logger
 
-logObj = my-logger.giveMeLoggingObject()
+logObj = my_logger.giveMeLoggingObject()
 
 def getCountFromAnalysis(ls_):
     list2ret           = []
