@@ -1,0 +1,16 @@
+name: 'Simple Fuzzer'
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  fuzzer_job:
+    name: Fuzzing Python Methods
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+        
+      - name: Run fuzz.py
+        run: python3 fuzz.py
