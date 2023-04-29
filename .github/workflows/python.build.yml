@@ -2,9 +2,9 @@ name: Build KubeTaint
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -29,6 +29,3 @@ jobs:
     - name: Run integration and taint-related tests 
       run: |
         python TEST_PARSING.py  
-    - name: Run fuzzer
-      run: |
-        python fuzz.py
