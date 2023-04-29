@@ -115,47 +115,10 @@ def fuzzValues():
 		print('OUTPUT: ', privOutput)
 	'''
 
-	print('parser.py/checkIfWeirdYAML()')
-	for value in values:
-		weirdOutput = parser.checkIfWeirdYAML(value)
-		if weirdOutput != False:
-			print('INPUT: ', value)
-			print('OUTPUT: ', weirdOutput)
-
 	print('parser.py/getValuesRecursively()')
 	recValuesOutput = parser.getValuesRecursively(values)
 	print('OUTPUT: ', recValuesOutput)
 
-	'''
-	print('parser.py/checkIfValidK8SYaml()')
-	for value in values:
-		k8syamlOutput = parser.checkIfValidK8SYaml(value)
-		print('INPUT: ', value)
-		print('OUTPUT: ', k8syamlOutput)
-	'''
-
-	print('parser.py/checkIfValidHelm()')
-	for value in values:
-		helmOutput = parser.checkIfValidHelm(value)
-		if helmOutput != False:
-			print('INPUT: ', value)
-			print('OUTPUT: ', helmOutput)
-
-	'''
-	print('parser.py/readYAMLAsStr()')
-	for value in values:
-		readOutput = parser.readYAMLAsStr(value)
-		print('INPUT: ', value)
-		print('OUTPUT: ', readOutput)
-	'''
-
-	'''
-	print('parser.py/loadMultiYAML()')
-	for value in values:
-		multiOutput = parser.loadMultiYAML(value)
-		print('INPUT: ', value)
-		print('OUTPUT: ', multiOutput)
-	'''
 
 	print('parser.py/getSingleDict4MultiDocs(lis_dic)')
 	predictedOutput = {}
@@ -188,29 +151,6 @@ def fuzzValues():
 			print('INPUT: ', value)
 			print('OUTPUT: ', validKeyOutput)
 
-
-	print('scanner.py/scanForSecrets(yaml_d)')
-	for value in values:
-		secOutput = scanner.scanForSecrets(value)
-		if secOutput != predictedOutput:
-			print('INPUT: ', value)
-			print('OUTPUT: ', secOutput)
-
-	'''
-	print('scanner.py/scanSingleManifest(path_to_script)')
-	for value in values:
-		validKeyOutput = scanner.scanSingleManifest(value)
-		print('INPUT: ', value)
-		print('OUTPUT: ', validKeyOutput)
-	'''
-
-	'''
-	print('scanner.py/scanForHTTP(path2script)')
-	for value in values:
-		validKeyOutput = scanner.scanForHTTP(value)
-		print('INPUT: ', value)
-		print('OUTPUT: ', validKeyOutput)
-	'''
 
 def simpleFuzzer():
     fuzzValues()
